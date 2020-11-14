@@ -13,7 +13,7 @@ app.get('/hot',function(req,res){
   res.send('you are so hot');
 });
 app.get('/pug',function(req,res){
-  res.render('news')
+  res.render('news',{tl:'머릿말 입니다.'})
 });
 app.get('/dynamic',function(req,res){
   //var sp = ''; //빈문자열
@@ -33,6 +33,68 @@ if(yesorno==true)
 document.write("당신은<font color=blue> 남성</font> 입니다!")
 else
 document.write("당신은<font color=red> 여성</font> 입니다!")</script>`);})
+app.get('/test',function(req,res){
+    var arr=[
+      'Coffee',
+      'Tea',
+      'Milk',
+      'cocoa',
+      'juice',
+      '아이스크림'
+    ]
+    var pick =`
+<a href="/test?id=0">Coffee</a><br>
+<a href="/test?id=1">Tea</a><br>
+<a href="/test?id=2">Milk</a><br>
+<a href="/test?id=3">cocoa</a><br>
+<a href="/test?id=4">juice</a><br>
+<a href="/test?id=5">icecream</a><br><br>
+${arr[req.query.id]}
+
+    `
+    res.send(pick)
+  //  res.send(arr[req.query.id])
+
+//  var qr =req.query.name;
+//  var id =req.query.id;
+//  var tt =req.query.tt;
+//  res.send(id +' , '+tt+' , '+ qr);
+})
+app.get('/inf',function(req,res){
+res.render('inf')
+
+})
+app.get('/new_password',function(req,res){
+  var id =req.query.id;
+  var pw =req.query.pw;
+  res.send(`
+  <h3>${id} 님 안녕하세요</h3><br>
+  <h3>패스워드가 '${pw}' 이건데 변경 하시겠습니까?</h3>
+  <a href="/new_password1"><h1>변경</h1></a>
+  <a href="/infopop"><h1>infopop</h1></a>
+  <a href="/new_password1"><h1>변경</h1></a><br>`
+)
+//res.render('new_password',{id:''}{pw:''})
+//res.snd('비밀번호 변경창<br>'
+//+req.query.id + '님 안녕하세요.<br>'
+//+req.query.id + '비밀번호를 변경하시겠습니까.<br>'
+//+req.query.id + '========>변경<br>'
+//+'<a href="/new_password1">변경</a>'
+//)
+
+})
+app.get('/new_password1',function(req,res){
+  res.render('new_password1')
+
+})
+app.get('/infopop',function(req,res){
+
+  res.send(`<script>
+      alert(' ---> 변경되었습니다.')
+      </script>`);
+res.render('info1')
+
+})
 
 app.listen(3013,function(){ //80은 기본포트라서 포트 숫자 안쳐도
   console.log('server running 3013 port');
