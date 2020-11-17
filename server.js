@@ -1,5 +1,4 @@
-
-
+var sha = require ('./SHA256_ex/sha256_ori.js');
 var express = require('express')
 var app = express()
 app.set('view engine', 'pug'); // (1) 퍼그 사용법
@@ -13,17 +12,18 @@ app.get('/hot',function(req,res){
   res.send('you are so hot');
 });
 
+
 app.get('/hash',function(req,res){
-
-res.render('hash')
-});
-app.get('/hash1',function(req,res){
-var sha = require ('./SHA256_ex/sha256_ori.js');
-
-res.render('hash1',{K:req.query.key,
-                    H:sha.s(req.query.key),
-                    DH:sha.s(sha.s(req.query.key))});
-
+var id = req.query.key;
+if (id){
+  var result=sha.s(req.query.key)
+  var result2=sha.s(result)
+res.render('hash',{K:req.query.key,
+                    H:result,
+                    DH:result2});
+}
+else
+{res.render('hash',{K:'Empty',H:'해시값1',DH:'해시값2'})}
 });
 
 
@@ -65,7 +65,6 @@ app.get('/test',function(req,res){
 <a href="/test?id=4">juice</a><br>
 <a href="/test?id=5">icecream</a><br><br>
 ${arr[req.query.id]}
-
     `
     res.send(pick)
   //  res.send(arr[req.query.id])

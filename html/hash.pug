@@ -4,7 +4,7 @@ html
     meta(charset='utf-8')
   body
   h1 SHA256로 암호화할 데이터를 넣으시오.
-    form(action='/hash1')
+    form(action='/hash')
       p
         input(type='text' name='key' placeholder='your key')
         br
@@ -14,5 +14,7 @@ html
         input(type='submit' value='변환')
       
   h3 SHA256 해쉬값:
-      
+  
+  h4 #{K} : #{H}
+  h4 double hash : #{DH}
        
