@@ -12,6 +12,21 @@ app.get('/',function(req,res){
 app.get('/hot',function(req,res){
   res.send('you are so hot');
 });
+
+app.get('/hash',function(req,res){
+
+res.render('hash')
+});
+app.get('/hash1',function(req,res){
+var sha = require ('./SHA256_ex/sha256_ori.js');
+
+res.render('hash1',{K:req.query.key,
+                    H:sha.s(req.query.key),
+                    DH:sha.s(sha.s(req.query.key))});
+
+});
+
+
 app.get('/pug',function(req,res){
   res.render('news',{tl:'머릿말 입니다.'})
 });
@@ -95,6 +110,7 @@ app.get('/infopop',function(req,res){
 res.render('info1')
 
 })
+
 
 app.listen(3013,function(){ //80은 기본포트라서 포트 숫자 안쳐도
   console.log('server running 3013 port');
